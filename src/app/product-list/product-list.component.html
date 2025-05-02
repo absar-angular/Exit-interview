@@ -1,0 +1,32 @@
+
+  
+  <button class="btn btn-success" (click)="onAddProduct()">Add Product</button>
+  <div class="d-flex">
+    <div>
+        <mat-list role="list" class="mx-4" style="width: 300px;">
+            <mat-list-item role="listitem" (click)="onSelect(product.id)" class="border rounded border-2 my-2 shadow-sm" *ngFor="let product of products$|async">
+                <div style="height: 200px;" class="my-2">
+                    <img [src]="product.image" class="object-fit-cover" style="height: 100%;" alt="product image">
+                </div>
+                <button (click)="onDeleteProduct(product.id)">Delete</button>
+                <h2 class="text-wrap">{{product.title}}</h2>
+                <strong>Price: {{product.price | currency:'INR'}}</strong>
+                <p class="text-wrap">{{product.description}}</p>
+            </mat-list-item>
+          </mat-list>
+    </div>
+    <div style="flex-grow: 1;" *ngIf="selectedProduct$| async as prod ">
+        <div class="card border rounded border-2">
+            <div style="height: 200px;" class="my-2">
+                <img [src]="prod.image" class="object-fit-cover" style="height: 100%;" alt="prod image">
+            </div>
+            <h2 class="text-wrap">{{prod.title}}</h2>
+            <strong>Price: {{prod.price | currency:'INR'}}</strong>
+            <p class="text-wrap">{{prod.description}}</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="spinner-border text-primary loader" role="status" *ngIf="isLoading$|async">
+    <span class="visually-hidden">Loading...</span>
+  </div>
