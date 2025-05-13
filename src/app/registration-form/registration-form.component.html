@@ -1,0 +1,30 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" style="max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;margin-top: 50px;">
+  <mat-form-field appearance="outline">
+    <mat-label>First Name</mat-label>
+    <input matInput formControlName="firstName" required>
+    <mat-error *ngIf="registrationForm.get('firstName')?.hasError('required')">First name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Last Name</mat-label>
+    <input matInput formControlName="lastName" required>
+    <mat-error *ngIf="registrationForm.get('lastName')?.hasError('required')">Last name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Department</mat-label>
+    <mat-select formControlName="department" required>
+      <mat-option *ngFor="let dept of departments" [value]="dept">{{ dept }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="registrationForm.get('department')?.hasError('required')">Department is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" required type="email">
+    <mat-error *ngIf="registrationForm.get('email')?.hasError('required')">Email is required</mat-error>
+    <mat-error *ngIf="registrationForm.get('email')?.hasError('email')">Enter a valid email</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="registrationForm.invalid">Register</button>
+</form>
